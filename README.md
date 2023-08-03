@@ -6,8 +6,8 @@ RedM Input System
 - `ensure fx-input` in the top of your resources.cfg 
 
 # features
-- Custom designe Fixitfy
-- Very easy to use
+- Custom designe Fixitfy.
+- Very easy to use.
 
 # Credit
 * credit goes to the QBCORE and RSGCore team for basecode and functionality
