@@ -6,7 +6,7 @@ RedM Input System
 - `ensure fx-input` in the top of your resources.cfg 
 
 # features
-- Custom dizayn Fixitfy
+- Custom designe Fixitfy
 - Very easy to use
 
 # Credit
