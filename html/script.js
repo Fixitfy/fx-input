@@ -98,7 +98,6 @@ const renderNumberInput = (item) => {
     }
 };
 
-
 const renderRadioInput = (item) => {
     const { options, name, text } = item;
     formInputs[name] = options[0].value;
