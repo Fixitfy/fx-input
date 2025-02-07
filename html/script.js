@@ -82,6 +82,7 @@ const renderPasswordInput = (item) => {
 
     return ` <input placeholder="${text}" type="password" class="form-control" name="${name}" ${defaultValue} ${isRequired}/>`;
 };
+
 const renderNumberInput = (item) => {
     try {
         const { text, name } = item;
@@ -91,12 +92,18 @@ const renderNumberInput = (item) => {
         const step = item.step ? item.step : "any"; 
         const min = item.min ? `min="${item.min}"` : "";
 
-        return `<input placeholder="${text}" type="number" class="form-control" name="${name}" ${defaultValue} ${isRequired} step="${step}" ${min}/>`;
+        return `<input placeholder="${text}" type="number" class="form-control number-input" 
+                name="${name}" ${defaultValue} ${isRequired} step="${step}" ${min}/>`;
     } catch (err) {
         console.log(err);
         return "";
     }
 };
+
+$(document).on("input", ".number-input", function () {
+    let sanitizedValue = this.value.replace(/[^0-9]/g, ""); 
+    this.value = sanitizedValue;
+});
 
 const renderRadioInput = (item) => {
     const { options, name, text } = item;

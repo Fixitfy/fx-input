@@ -8,6 +8,8 @@ RedM Input System
 # features
 - Custom designe Fixitfy.
 - Very easy to use.
+- vorp_inventory/html/img/example.png for icon usage
+- icon = example.png
 
 # Credit
 * credit goes to the QBCORE and RSGCore team for basecode and functionality
