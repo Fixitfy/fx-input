@@ -82,28 +82,68 @@ const renderPasswordInput = (item) => {
 
     return ` <input placeholder="${text}" type="password" class="form-control" name="${name}" ${defaultValue} ${isRequired}/>`;
 };
-
 const renderNumberInput = (item) => {
     try {
         const { text, name } = item;
         formInputs[name] = item.default ? item.default : "";
         const isRequired = item.isRequired == "true" || item.isRequired ? "required" : "";
         const defaultValue = item.default ? `value="${item.default}"` : "";
-        const step = item.step ? item.step : "any"; 
+        const step = item.step ? item.step : "0.01";  // kesin ondalık
         const min = item.min ? `min="${item.min}"` : "";
 
-        return `<input placeholder="${text}" type="number" class="form-control number-input" 
-                name="${name}" ${defaultValue} ${isRequired} step="${step}" ${min}/>`;
+        return `<input placeholder="${text}" type="number" inputmode="decimal"
+                class="form-control number-input" name="${name}"
+                ${defaultValue} ${isRequired} step="${step}" ${min}/>`;
     } catch (err) {
         console.log(err);
         return "";
     }
 };
+const renderDecimalInput = (item) => {
+    const { text, name } = item;
+    formInputs[name] = item.default ? item.default : "";
+    const isRequired = item.isRequired == "true" || item.isRequired ? "required" : "";
+    const defaultValue = item.default ? `value="${item.default}"` : "";
 
-$(document).on("input", ".number-input", function () {
-    let sanitizedValue = this.value.replace(/[^0-9]/g, ""); 
-    this.value = sanitizedValue;
+    return `
+        <div class="form-input-group">
+            <div class="form-group-title">${text}</div>
+            <input
+                type="text"
+                inputmode="decimal"
+                pattern="^\\d*(\\.\\d{0,2})?$"
+                class="form-control decimal-input"
+                name="${name}"
+                placeholder="${text}"
+                ${defaultValue}
+                ${isRequired}
+            />
+        </div>
+    `;
+};
+
+$(document).on("input", ".decimal-input", function () {
+    let value = this.value;
+
+    value = value.replace(/[^0-9.]/g, "");
+
+    const parts = value.split(".");
+    if (parts.length > 2) {
+        value = parts[0] + "." + parts[1];
+    }
+
+    if (parts[1]) {
+        parts[1] = parts[1].slice(0, 2);
+        value = parts[0] + "." + parts[1];
+    }
+
+    this.value = value;
 });
+
+
+
+
+
 
 const renderRadioInput = (item) => {
     const { options, name, text } = item;
